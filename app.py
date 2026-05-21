@@ -141,14 +141,15 @@ if st.button("⚡ Generate Perfect Fatigue-Compliant Schedule"):
             text_color = "#000000" if color in ["#FFFF00", "#FFFFFF", "#00FF00", "#A6A6A6", "#E2EFDA", "#F4B183"] else "#FFFFFF"
             return f'background-color: {color}; color: {text_color}; font-weight: bold; text-align: center;'
 
-        styled_df = df.style.map(apply_cell_styles, subset=DISPLAY_COLS)
+                styled_df = df.style.map(apply_cell_styles, subset=DISPLAY_COLS)
         st.dataframe(styled_df, height=850, use_container_width=True)
         
-                st.download_button(
+        csv = df.to_csv(index=False).encode('utf-8')
+        st.download_button(
             label="📥 Download Roster Data as CSV",
             data=csv,
             file_name=f"ATC_Roster_{shift_date}_{shift_type}.csv",
-            mime='text/csv',
+            mime='text/csv'
         )
     else:
         st.error("Could not generate schedule. Please check constraints.")
