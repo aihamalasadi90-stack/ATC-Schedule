@@ -144,8 +144,11 @@ if st.button("⚡ Generate Perfect Fatigue-Compliant Schedule"):
         styled_df = df.style.map(apply_cell_styles, subset=DISPLAY_COLS)
         st.dataframe(styled_df, height=850, use_container_width=True)
         
-        csv = df.to_csv(index=False).encode('utf-8')
-        st.download_button(
+                st.download_button(
             label="📥 Download Roster Data as CSV",
             data=csv,
-            file
+            file_name=f"ATC_Roster_{shift_date}_{shift_type}.csv",
+            mime='text/csv',
+        )
+    else:
+        st.error("Could not generate schedule. Please check constraints.")
