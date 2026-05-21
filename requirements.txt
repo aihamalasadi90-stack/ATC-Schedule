@@ -1,1 +1,4 @@
 # ATC Schedule Application Dependencies
+streamlit
+ortools
+pandas
